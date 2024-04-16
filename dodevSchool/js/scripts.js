@@ -15,13 +15,7 @@ class Aluno {
 }
 
 // Array
-// let Alunos = []
-let Alunos = [
-  new Aluno("João", 18, 10),
-  new Aluno("Bea", 19, 2),
-  new Aluno("Victor", 20, 7),
-  new Aluno("John", 21, 8),
-]
+let Alunos = []
 
 
 //funções projeto
@@ -48,18 +42,26 @@ function OrdenarPorNota() {
 }
 
 function OrdenarPorIdade() {
-  pass
-
+  Alunos.sort(function(a,b) {
+    return a.idade > b.idade ? -1: a.idade < a.idade ? 1:0;
+  })
+  return Alunos
 }
 
 function OrdenarPorNome() {
-  pass
+  Alunos.sort(function(a, b) {
+    const nomeA = a.nome.toLowerCase()
+    const nomeB = b.nome.toLowerCase()
 
+    return nomeA.localeCompare(nomeB)
+  })
+  return Alunos
 }
 
 function CalcularMedia(){
-  pass
-
+  let total = 0
+  Alunos.forEach( x => total += x.nota)
+  return total/Alunos.length
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -132,10 +134,9 @@ const saveAluno = (nome, idade, nota, done = 0, save = 1) => {
   // Utilizando dados da localStorage
 
   alunoList.appendChild(aluno);
-  
 
   const media = document.querySelector("#media");
-  media.textContent = CalcularMedia(arrayAlunos).toFixed(2)
+  media.textContent = CalcularMedia(Alunos).toFixed(2)
 
   alunoInput.value = "";
   alunoInput2.value = "";
@@ -152,7 +153,7 @@ const toggleForms = () => {
 const getBuscarAluno = (busca) => {
   const Alunos = document.querySelectorAll(".aluno");
 
-  let pesquisa = PesquisarAluno(arrayAlunos, busca)
+  let pesquisa = PesquisarAluno(Alunos, busca)
 
   if (pesquisa) {
     Alunos.forEach((aluno) => {
@@ -177,24 +178,24 @@ const filterAlunos = (filterValue) => {
       Alunos.forEach((aluno) => {
         aluno.remove()
       })
-      arrayAlunos = OrdenarPorNota(arrayAlunos)
-      arrayAlunos.forEach((aluno) => saveAluno(aluno.Nome, aluno.Idade, aluno.Nota, done = 0, save = 1))
+      Alunos = OrdenarPorNota(Alunos)
+      Alunos.forEach((aluno) => saveAluno(aluno.Nome, aluno.Idade, aluno.Nota, done = 0, save = 1))
       break;
 
     case "idade":
       Alunos.forEach((aluno) => {
         aluno.remove()
       })
-      arrayAlunos = OrdenarPorIdade(arrayAlunos)
-      arrayAlunos.forEach((aluno) => saveAluno(aluno.Nome, aluno.Idade, aluno.Nota, done = 0, save = 1))
+      Alunos = OrdenarPorIdade(Alunos)
+      Alunos.forEach((aluno) => saveAluno(aluno.Nome, aluno.Idade, aluno.Nota, done = 0, save = 1))
       break;
 
     case "nome":
       Alunos.forEach((aluno) => {
         aluno.remove()
       })
-      arrayAlunos = OrdenarPorNome(arrayAlunos)
-      arrayAlunos.forEach((aluno) => saveAluno(aluno.Nome, aluno.Idade, aluno.Nota, done = 0, save = 1))
+      Alunos = OrdenarPorNome(Alunos)
+      Alunos.forEach((aluno) => saveAluno(aluno.Nome, aluno.Idade, aluno.Nota, done = 0, save = 1))
       break;
 
     default:
@@ -226,7 +227,7 @@ document.addEventListener("click", (e) => {
 
   if (targetEl.classList.contains("remove-aluno")) {
     alunoTitle = parentEl.querySelector("h3").innerText
-    let removido = ExcluirAluno(arrayAlunos, alunoTitle)
+    let removido = ExcluirAluno(Alunos, alunoTitle)
     if (removido) {
       parentEl.remove();
 
@@ -261,7 +262,7 @@ filterBtn.addEventListener("change", (e) => {
 
 // const loadAlunos = () => {
 
-//   arrayAlunos.forEach((aluno) => {
+//   Alunos.forEach((aluno) => {
 //     saveAluno(aluno.Nome, aluno.Idade, aluno.Nota, 0);
 //   });
 // };
