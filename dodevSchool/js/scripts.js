@@ -15,13 +15,21 @@ class Aluno {
 }
 
 // Array
-let Alunos = []
+// let Alunos = []
+let Alunos = [
+  new Aluno("João", 18, 10),
+  new Aluno("Bea", 19, 2),
+  new Aluno("Victor", 20, 7),
+  new Aluno("John", 21, 8),
+]
+
 
 //funções projeto
 
 function CadastrarAluno(nome, idade, nota) {
 
   let aluno = new Aluno(nome, idade, nota)
+  
   if(!Alunos.some(obj => obj.nome == nome)) {
     Alunos.push(aluno)
     alert("Aluno cadastrado com sucesso")
@@ -32,7 +40,11 @@ function CadastrarAluno(nome, idade, nota) {
 }
 
 function OrdenarPorNota() {
- pass
+  Alunos.sort(function(a,b) {
+    return a.nota < b.nota ? -1 : a.nota > b.nota ? 1: 0;
+    }
+  );
+  return Alunos
 }
 
 function OrdenarPorIdade() {
