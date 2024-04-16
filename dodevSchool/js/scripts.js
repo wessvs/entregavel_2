@@ -3,7 +3,15 @@
 ////////////////////////////////////////////////////////////////////////
 
 class Aluno {
-  
+  nome
+  idade
+  nota
+
+  constructor(nome, idade, nota) {
+    this.nome = nome;
+    this.idade = idade;
+    this.nota = nota;
+  }
 }
 
 // Array
