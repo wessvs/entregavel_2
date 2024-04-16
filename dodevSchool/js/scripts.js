@@ -15,27 +15,38 @@ class Aluno {
 }
 
 // Array
-
+let Alunos = []
 
 //funções projeto
 
-function CadastrarAluno() {
-  
+function CadastrarAluno(nome, idade, nota) {
+
+  let aluno = new Aluno(nome, idade, nota)
+  if(!Alunos.some(obj => obj.nome == nome)) {
+    Alunos.push(aluno)
+    alert("Aluno cadastrado com sucesso")
+  } else {
+    alert("Aluno ja cadastrado")
+  }
+  return aluno
 }
 
 function OrdenarPorNota() {
- 
+ pass
 }
 
 function OrdenarPorIdade() {
+  pass
 
 }
 
 function OrdenarPorNome() {
+  pass
 
 }
 
 function CalcularMedia(){
+  pass
 
 }
 
@@ -84,7 +95,7 @@ let oldInputValue;
 
 // Funções
 const saveAluno = (nome, idade, nota, done = 0, save = 1) => {
-  let objetoAluno = CadastrarAluno(nome, idade, nota, arrayAlunos)
+  let objetoAluno = CadastrarAluno(nome, idade, nota, Alunos)
 
   const aluno = document.createElement("div");
   aluno.classList.add("aluno");
@@ -127,12 +138,12 @@ const toggleForms = () => {
 };
 
 const getBuscarAluno = (busca) => {
-  const alunos = document.querySelectorAll(".aluno");
+  const Alunos = document.querySelectorAll(".aluno");
 
   let pesquisa = PesquisarAluno(arrayAlunos, busca)
 
   if (pesquisa) {
-    alunos.forEach((aluno) => {
+    Alunos.forEach((aluno) => {
       const alunoNome = aluno.querySelector("h3").innerText.toLowerCase();
 
       aluno.style.display = "flex";
@@ -147,11 +158,11 @@ const getBuscarAluno = (busca) => {
 
 
 const filterAlunos = (filterValue) => {
-  const alunos = document.querySelectorAll(".aluno");
+  const Alunos = document.querySelectorAll(".aluno");
 
   switch (filterValue) {
     case "nota":
-      alunos.forEach((aluno) => {
+      Alunos.forEach((aluno) => {
         aluno.remove()
       })
       arrayAlunos = OrdenarPorNota(arrayAlunos)
@@ -159,7 +170,7 @@ const filterAlunos = (filterValue) => {
       break;
 
     case "idade":
-      alunos.forEach((aluno) => {
+      Alunos.forEach((aluno) => {
         aluno.remove()
       })
       arrayAlunos = OrdenarPorIdade(arrayAlunos)
@@ -167,7 +178,7 @@ const filterAlunos = (filterValue) => {
       break;
 
     case "nome":
-      alunos.forEach((aluno) => {
+      Alunos.forEach((aluno) => {
         aluno.remove()
       })
       arrayAlunos = OrdenarPorNome(arrayAlunos)
